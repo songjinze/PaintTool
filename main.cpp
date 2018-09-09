@@ -1,11 +1,19 @@
-#include "mainwindow.h"
+#include "notepad.h"
+
 #include <QApplication>
+#include <QPushButton>
+#include <QTextEdit>
+#include <QVBoxLayout>
+
+
+
 
 int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
-    MainWindow w;
-    w.show();
+
+    Notepad notepad;
+    notepad.show();
 
     return a.exec();
 }
