@@ -24,10 +24,14 @@ CONFIG += c++11
 
 SOURCES += \
         main.cpp \
-    notepad.cpp
+    notepad.cpp \
+    drawwidget.cpp \
+    mainwindow.cpp
 
 HEADERS += \
-    notepad.h
+    notepad.h \
+    drawwidget.h \
+    mainwindow.h
 
 FORMS +=
 
