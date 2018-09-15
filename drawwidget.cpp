@@ -1,6 +1,8 @@
 #include "drawwidget.h"
 #include<QMouseEvent>
 #include <QPainter>
+#include <qfiledialog.h>
+#include <qmessagebox.h>
 
 DrawWidget::DrawWidget(){
     setAutoFillBackground(true);
@@ -8,21 +10,6 @@ DrawWidget::DrawWidget(){
     pix=new QPixmap(size());
     pix->fill(Qt::white);
     setMinimumSize(600,400);
-}
-
-void DrawWidget::setStyle(int s)
-{
-    style=s;
-}
-
-void DrawWidget::setWidth(int w)
-{
-    weight=w;
-}
-
-void DrawWidget::setColor(QColor c)
-{
-    color=c;
 }
 
 void DrawWidget::mousePressEvent(QMouseEvent *e)
@@ -34,9 +21,6 @@ void DrawWidget::mouseMoveEvent(QMouseEvent *e)
 {
     QPainter *painter=new QPainter;
     QPen pen;
-    pen.setStyle((Qt::PenStyle)style);
-    pen.setWidth(weight);
-    pen.setColor(color);
 
     painter->begin(pix);
     painter->setPen(pen);
@@ -65,6 +49,22 @@ void DrawWidget::resizeEvent(QResizeEvent *event)
         pix=newPix;
     }
     QWidget::resizeEvent(event);
+}
+
+void DrawWidget::save(){
+    QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"",tr("PNG files(*.png)"));
+    if(fileName!=""){
+        pix->save(fileName);
+    }
+}
+
+void DrawWidget::open(){
+    QString fileName=QFileDialog::getOpenFileName(this,tr("Load File"),"",tr("PNG files(*.png)"));
+    if(fileName!=""){
+        if(!pix->load(fileName)){
+            QMessageBox::critical(this,tr("error"),tr("Could not load file!"));
+        };
+    }
 }
 
 void DrawWidget::clear(){
