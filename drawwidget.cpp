@@ -54,7 +54,9 @@ void DrawWidget::resizeEvent(QResizeEvent *event)
 void DrawWidget::save(){
     QString fileName=QFileDialog::getSaveFileName(this,tr("Save File"),"",tr("PNG files(*.png)"));
     if(fileName!=""){
-        pix->save(fileName);
+        if(!pix->save(fileName)){
+            QMessageBox::critical(this,tr("error"),tr("Could not save file!"));
+        };
     }
 }
 
