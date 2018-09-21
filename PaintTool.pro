@@ -25,11 +25,15 @@ CONFIG += c++11
 SOURCES += \
         main.cpp \
     drawwidget.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    shape.cpp \
+    picture.cpp
 
 HEADERS += \
     drawwidget.h \
-    mainwindow.h
+    mainwindow.h \
+    shape.h \
+    picture.h
 
 FORMS +=
 

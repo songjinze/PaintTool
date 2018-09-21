@@ -1,11 +1,6 @@
 #include "drawwidget.h"
-
-#include <QComboBox>
-#include <QLabel>
-#include <QSpinBox>
-#include <qmainwindow.h>
+#include <qtoolbar.h>
 #include <qtoolbutton.h>
-
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
@@ -18,15 +13,12 @@ public:
     MainWindow();
 private:
     void createToolBar();
-private slots:
-    void showStyle();
-    void showColor();
+    void initBar();
 private:
     DrawWidget *drawWidget;
-    QLabel *widthLabel;
-    QSpinBox *widthSpinBox;
-    QLabel *styleLabel;
-    QComboBox *styleComboBox;
-    QToolButton *colorBtn;
+    QToolButton *newShapeBtn;
+    QToolButton *saveBtn;
+    QToolButton *loadBtn;
     QToolButton *clearBtn;
+    QToolBar *toolBar;
 };
