@@ -16,6 +16,7 @@ private:
     void initBar();
 private:
     DrawWidget *drawWidget;
+    QToolButton *newShapeBtn;
     QToolButton *saveBtn;
     QToolButton *loadBtn;
     QToolButton *clearBtn;
