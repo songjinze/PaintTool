@@ -1,5 +1,5 @@
 #include <QMainWindow>
-
+#include "shapedetecter.h"
 #ifndef DRAWWIDGET_H
 #define DRAWWIDGET_H
 
@@ -10,6 +10,7 @@ class DrawWidget:public QWidget
     Q_OBJECT
 public:
     DrawWidget();
+    ~DrawWidget();
     void mousePressEvent(QMouseEvent *e);
     void mouseMoveEvent(QMouseEvent *e);
     void paintEvent(QPaintEvent *);
@@ -21,5 +22,6 @@ private slots:
 private:
     QPixmap *pix;
     QPoint startPos;
+    ShapeDetecter *shapedetecter;
 };
 

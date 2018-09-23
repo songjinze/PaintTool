@@ -9,7 +9,13 @@ DrawWidget::DrawWidget(){
     setPalette(QPalette(Qt::white));
     pix=new QPixmap(size());
     pix->fill(Qt::white);
+    ShapeDetecter shapedetecter;
     setMinimumSize(600,400);
+}
+
+DrawWidget::~DrawWidget(){
+    delete pix;
+    delete shapedetecter;
 }
 
 void DrawWidget::mousePressEvent(QMouseEvent *e)
@@ -63,6 +69,7 @@ void DrawWidget::save(){
 void DrawWidget::open(){
     QString fileName=QFileDialog::getOpenFileName(this,tr("Load File"),"",tr("PNG files(*.png)"));
     if(fileName!=""){
+        shapedetecter->shapeDetect(fileName.toStdString());
         if(!pix->load(fileName)){
             QMessageBox::critical(this,tr("error"),tr("Could not load file!"));
         };

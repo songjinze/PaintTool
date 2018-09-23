@@ -5,6 +5,7 @@
 #include <QColorDialog>
 MainWindow::MainWindow()
 {
+
     drawWidget=new DrawWidget;
     this->setCentralWidget(drawWidget);
 

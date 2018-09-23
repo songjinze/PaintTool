@@ -26,18 +26,28 @@ SOURCES += \
         main.cpp \
     drawwidget.cpp \
     mainwindow.cpp \
-    shape.cpp \
-    picture.cpp
+    shapedetecter.cpp
 
 HEADERS += \
     drawwidget.h \
     mainwindow.h \
-    shape.h \
-    picture.h
+    shapedetecter.h
 
 FORMS +=
+
+INCLUDEPATH += D:\opencv\build\include
+
+LIBS += D:\opencv-build\bin\libopencv_core320.dll
+LIBS += D:\opencv-build\bin\libopencv_highgui320.dll
+LIBS += D:\opencv-build\bin\libopencv_imgcodecs320.dll
+LIBS += D:\opencv-build\bin\libopencv_imgproc320.dll
+LIBS += D:\opencv-build\bin\libopencv_features2d320.dll
+LIBS += D:\opencv-build\bin\libopencv_calib3d320.dll
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+
+
