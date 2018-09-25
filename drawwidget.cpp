@@ -69,7 +69,6 @@ void DrawWidget::save(){
 void DrawWidget::open(){
     QString fileName=QFileDialog::getOpenFileName(this,tr("Load File"),"",tr("PNG files(*.png)"));
     if(fileName!=""){
-        shapedetecter->shapeDetect(fileName.toStdString());
         if(!pix->load(fileName)){
             QMessageBox::critical(this,tr("error"),tr("Could not load file!"));
         };
@@ -83,4 +82,18 @@ void DrawWidget::clear(){
     p.drawPixmap(QPoint(0,0),*newPix);
     pix=newPix;
     QWidget::update();
+}
+
+void DrawWidget::autoDetect(){
+    QString currentPath=QDir::currentPath()+"/temp.png";
+    if(!pix->save(currentPath)){
+        QMessageBox::critical(this,tr("error"),tr("Could not save file!"));
+    };
+    QString fileName=QFileDialog::getSaveFileName(this,tr("output file"),"",tr("PNG files(*.png)"));
+    if(fileName!=""){
+        shapedetecter->shapeDetect(currentPath.toStdString(),fileName.toStdString());
+    }
+    if(!pix->load(fileName)){
+        QMessageBox::critical(this,tr("error"),tr("Could not load file!"));
+    };
 }

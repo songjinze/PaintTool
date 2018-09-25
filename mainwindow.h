@@ -20,5 +20,6 @@ private:
     QToolButton *saveBtn;
     QToolButton *loadBtn;
     QToolButton *clearBtn;
+    QToolButton *detectBtn;
     QToolBar *toolBar;
 };

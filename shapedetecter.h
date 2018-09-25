@@ -12,5 +12,5 @@ private:
     void thinningIteration(cv::Mat&img,int iter);
     void thinning(const cv::Mat& src,cv::Mat& dst);
 public:
-    void shapeDetect(string path_to_img);
+    void shapeDetect(string path_to_img,string save_path);
 };

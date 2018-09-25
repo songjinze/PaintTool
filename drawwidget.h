@@ -19,6 +19,7 @@ private slots:
     void save();
     void open();
     void clear();
+    void autoDetect();
 private:
     QPixmap *pix;
     QPoint startPos;

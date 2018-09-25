@@ -28,13 +28,16 @@ void MainWindow::createToolBar()
     loadBtn->setText(tr("load"));
     clearBtn=new QToolButton;
     clearBtn->setText(tr("clear"));
+    detectBtn=new QToolButton;
+    detectBtn->setText(tr("detect shape"));
     connect(newShapeBtn,SIGNAL(clicked()),drawWidget,SLOT());
     connect(saveBtn,SIGNAL(clicked()),drawWidget,SLOT(save()));
     connect(loadBtn,SIGNAL(clicked()),drawWidget,SLOT(open()));
     connect(clearBtn,SIGNAL(clicked()),drawWidget,SLOT(clear()));
-
+    connect(detectBtn,SIGNAL(clicked()),drawWidget,SLOT(autoDetect()));
     toolBar->addWidget(saveBtn);
     toolBar->addWidget(loadBtn);
     toolBar->addWidget(clearBtn);
+    toolBar->addWidget(detectBtn);
 }
 

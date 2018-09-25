@@ -104,7 +104,7 @@ void ShapeDetecter::thinning(const cv::Mat& src, cv::Mat& dst)
 }
 
 
-void ShapeDetecter::shapeDetect(string path_to_image)
+void ShapeDetecter::shapeDetect(string path_to_image,string save_path)
 {
     RNG rng(123);
 
@@ -147,45 +147,45 @@ void ShapeDetecter::shapeDetect(string path_to_image)
         {
             // CIRCLE
 
-            //{
-            //  // Fit an ellipse ...
-            //  RotatedRect rect = fitEllipse(contour);
-            //  Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-            //  ellipse(res, rect, color, 5);
-            //}
             {
-                // ... or find min enclosing circle
-                Point2f center;
-                float radius;
-                minEnclosingCircle(contour, center, radius);
-                Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-                circle(res, center, radius, color, 5);
+              // Fit an ellipse ...
+              RotatedRect rect = fitEllipse(contour);
+              Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+              ellipse(res, rect, color, 5);
             }
+//            {
+//                // ... or find min enclosing circle
+//                Point2f center;
+//                float radius;
+//                minEnclosingCircle(contour, center, radius);
+//                Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+//                circle(res, center, radius, color, 5);
+//            }
         }
         else if (circularity > 0.75)
         {
             // RECTANGLE
 
-            //{
-            //  // Minimum oriented bounding box ...
-            //  RotatedRect rect = minAreaRect(contour);
-            //  Point2f pts[4];
-            //  rect.points(pts);
-
-            //  Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-            //  for (int i = 0; i < 4; ++i)
-            //  {
-            //      line(res, pts[i], pts[(i + 1) % 4], color, 5);
-            //  }
-            //}
             {
-                // ... or bounding box
-                Rect box = boundingRect(contour);
-                Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
-                rectangle(res, box, color, 5);
+              // Minimum oriented bounding box ...
+              RotatedRect rect = minAreaRect(contour);
+              Point2f pts[4];
+              rect.points(pts);
+
+              Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+              for (int i = 0; i < 4; ++i)
+              {
+                  line(res, pts[i], pts[(i + 1) % 4], color, 5);
+              }
             }
+//            {
+//                // ... or bounding box
+//                Rect box = boundingRect(contour);
+//                Scalar color = Scalar(rng.uniform(0, 255), rng.uniform(0, 255), rng.uniform(0, 255));
+//                rectangle(res, box, color, 5);
+//            }
         }
-        else if (circularity > 0.7)
+        else if (circularity > 0.5)
         {
             // TRIANGLE
 
@@ -232,20 +232,16 @@ void ShapeDetecter::shapeDetect(string path_to_image)
         }
 
     }
-
-
-        vector<int> compression_params;
-        compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
-        compression_params.push_back(9);
-
-        try {
-            imwrite("D://alpha.png", res, compression_params);
-        }
-        catch (runtime_error& ex) {
-            fprintf(stderr, "Exception converting image to PNG format: %s\n", ex.what());
-            return;
-        }
-
-        fprintf(stdout, "Saved PNG file with alpha data.\n");
+    vector<int> compression_params;
+    compression_params.push_back(CV_IMWRITE_PNG_COMPRESSION);
+    compression_params.push_back(9);
+    try {
+        imwrite(save_path, res, compression_params);
+    }
+    catch (runtime_error& ex) {
+        fprintf(stderr, "Exception converting image to PNG format: %s\n", ex.what());
+        return;
+    }
+    fprintf(stdout, "Saved PNG file with alpha data.\n");
     return;
 }
